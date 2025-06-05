@@ -23,6 +23,8 @@ from .environment_snapshot_manager import EnvironmentSnapshotManager
 from .mama_bear_observability import ProfessionalObservability
 from .mama_bear_specialized_variants import *
 from .mama_bear_monitoring import MamaBearMonitoring
+from .ingestion_routes import bp as ingestion_bp
+from .utils_routes import bp as utils_bp
 
 # Import external dependencies
 import scrapybara
@@ -54,6 +56,9 @@ class CompleteMamaBearSystem:
         self.app = app
         self.socketio = socketio
         self.is_initialized = False
+        # Register ingestion and utility routes for Mem0-powered knowledge ingestion
+        self.app.register_blueprint(ingestion_bp)
+        self.app.register_blueprint(utils_bp)
         
         # Core components
         self.model_manager = None

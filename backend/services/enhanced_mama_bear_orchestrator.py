@@ -43,7 +43,7 @@ class AgentTask:
 class EnhancedMamaBearOrchestrator:
     """Orchestrates multiple Mama Bear agents with enhanced capabilities"""
     
-    def __init__(self, memory_manager=None):
+    def __init__(self, memory_manager=None, model_manager=None, scrapybara_client=None):
         self.active_tasks: Dict[str, AgentTask] = {}
         self.agent_pool = {
             'research_specialist': {'status': 'available', 'capabilities': ['research', 'analysis']},
@@ -53,6 +53,8 @@ class EnhancedMamaBearOrchestrator:
             'multi_instance_coordinator': {'status': 'available', 'capabilities': ['multi_instance', 'parallel_processing']}
         }
         self.memory_manager = memory_manager or EnhancedMemoryManager()
+        self.model_manager = model_manager
+        self.scrapybara_client = scrapybara_client
         
     async def submit_task(self, task_description: str, task_type: TaskType, user_id: str, priority: int = 1) -> str:
         """Submit a new task to the orchestrator"""

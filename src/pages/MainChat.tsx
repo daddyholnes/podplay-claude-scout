@@ -18,6 +18,8 @@ import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Card } from '../components/ui/card';
 
+import Mem0IngestionPanel from '../components/Mem0IngestionPanel';
+
 export default function MainChat() {
   const { theme } = useTheme();
   const { emit, on, off, connected } = useSocket();
@@ -364,6 +366,8 @@ export default function MainChat() {
           </div>
         </div>
       </div>
+    {/* Mem0 Knowledge Ingestion Floating Panel */}
+    <Mem0IngestionPanel />
     </div>
   );
 }
