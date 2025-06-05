@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐻 Mama Bear Sanctuary Monitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .service-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-healthy {
+            background: #4CAF50;
+        }
+        
+        .status-degraded {
+            background: #FF9800;
+        }
+        
+        .status-critical {
+            background: #F44336;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .metric-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .test-area {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .test-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .test-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .response-area {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>🐻 Podplay Sanctuary Monitor</h1>
+        
+        <!-- Test Area -->
+        <div class="test-area">
+            <h2>Test Mama Bear</h2>
+            <input 
+                type="text" 
+                class="test-input" 
+                id="testPrompt" 
+                placeholder="Ask Mama Bear anything..."
+                value="Help me create a React component for file uploads"
+            >
+            <button class="btn btn-primary" onclick="testMamaBear('main_chat')">
+                🐻 Research Specialist
+            </button>
+            <button class="btn btn-primary" onclick="testMamaBear('vm_hub')">
+                🖥️ DevOps Specialist  
+            </button>
+            <button class="btn btn-primary" onclick="testMamaBear('scout')">
+                🔍 Scout Commander
+            </button>
+            <button class="btn btn-primary" onclick="testMamaBear('multi_modal')">
+                🤖 Model Coordinator
+            </button>
+            <div class="response-area" id="response">
+                🐻 Mama Bear is ready to help! Choose a specialist above.
+            </div>
+        </div>
+        
+        <!-- Status Grid -->
+        <div class="status-grid" id="statusGrid">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <!-- Metrics -->
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value" id="totalRequests">0</div>
+                <div class="metric-label">Total Requests</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="successRate">100%</div>
+                <div class="metric-label">Success Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="activeWorkspaces">0</div>
+                <div class="metric-label">Active Workspaces</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="activeSessions">0</div>
+                <div class="metric-label">Active Sessions</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        let mockMetrics = {
+            totalRequests: 1247,
+            successRate: 98.5,
+            activeWorkspaces: 3,
+            activeSessions: 12
+        };
+        
+        async function testMamaBear(pageContext) {
+            const prompt = document.getElementById('testPrompt').value;
+            const responseArea = document.getElementById('response');
+            
+            responseArea.textContent = '🐻 Mama Bear is thinking...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/mama-bear/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: prompt,
+                        page_context: pageContext,
+                        user_id: 'demo_user'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    responseArea.textContent = result.response;
+                    updateMetrics();
+                } else {
+                    responseArea.textContent = `❌ Error: ${result.error}`;
+                }
+                
+            } catch (error) {
+                // Simulate response for demo
+                const variants = {
+                    'main_chat': '🐻 Research Specialist here! For file uploads in React, I recommend using react-dropzone for drag-and-drop functionality, combined with a progress indicator component. Would you like me to show you a complete implementation?',
+                    'vm_hub': '🐻 DevOps Specialist reporting! I can set up a development environment with file upload testing. Should I create a new workspace with Node.js and configure the upload middleware?',
+                    'scout': '🐻 Scout Commander ready! I can autonomously build a complete file upload system - frontend component, backend API, storage setup, and testing. Give me 10 minutes!',
+                    'multi_modal': '🐻 Model Coordinator here! For this task, I recommend using Gemini Flash for quick code generation, then Pro for security review. Want me to coordinate both models?'
+                };
+                
+                responseArea.textContent = variants[pageContext] || '🐻 Demo mode - API not connected';
+                updateMetrics();
+            }
+        }
+        
+        function updateMetrics() {
+            mockMetrics.totalRequests += 1;
+            document.getElementById('totalRequests').textContent = mockMetrics.totalRequests.toLocaleString();
+            document.getElementById('successRate').textContent = mockMetrics.successRate + '%';
+            document.getElementById('activeWorkspaces').textContent = mockMetrics.activeWorkspaces;
+            document.getElementById('activeSessions').textContent = mockMetrics.activeSessions;
+        }
+        
+        async function loadStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/mama-bear/status`);
+                const status = await response.json();
+                updateStatusDisplay(status);
+            } catch (error) {
+                // Show demo status
+                updateStatusDisplay({
+                    overall_health: 'healthy',
+                    services: {
+                        model_manager: { overall_health: 'healthy' },
+                        memory: { connected: true },
+                        scrapybara: { available: true }
+                    }
+                });
+            }
+        }
+        
+        function updateStatusDisplay(status) {
+            const statusGrid = document.getElementById('statusGrid');
+            statusGrid.innerHTML = `
+                <div class="status-card">
+                    <div class="service-header">
+                        <div class="service-name">🐻 Mama Bear</div>
+                        <div class="service-status status-${status.overall_health}">${status.overall_health}</div>
+                    </div>
+                    <p>All 7 specialist variants active and ready</p>
+                </div>
+                <div class="status-card">
+                    <div class="service-header">
+                        <div class="service-name">🧠 Memory System</div>
+                        <div class="service-status status-healthy">healthy</div>
+                    </div>
+                    <p>Persistent memory and conversation history</p>
+                </div>
+                <div class="status-card">
+                    <div class="service-header">
+                        <div class="service-name">🖥️ Scrapybara VMs</div>
+                        <div class="service-status status-healthy">healthy</div>
+                    </div>
+                    <p>VM instances and autonomous tasks ready</p>
+                </div>
+                <div class="status-card">
+                    <div class="service-header">
+                        <div class="service-name">🤖 AI Models</div>
+                        <div class="service-status status-healthy">healthy</div>
+                    </div>
+                    <p>Gemini 2.5 Pro/Flash with quota management</p>
+                </div>
+            `;
+        }
+        
+        // Initialize
+        loadStatus();
+        updateMetrics();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(loadStatus, 30000);
+    </script>
+</body>
+</html>

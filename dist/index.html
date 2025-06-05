@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐻 Enhanced Mama Bear Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'aurora': 'aurora 60s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes aurora {
+            0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+            33% { transform: translateX(30px) translateY(-30px) rotate(120deg); }
+            66% { transform: translateX(-20px) translateY(20px) rotate(240deg); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            50% { opacity: 0.8; box-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .mama-bear-glow {
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full opacity-30 animate-aurora"></div>
+        <div class="absolute top-1/2 right-10 w-24 h-24 bg-blue-500 rounded-full opacity-20 animate-aurora delay-1000"></div>
+        <div class="absolute bottom-10 left-1/3 w-40 h-40 bg-pink-500 rounded-full opacity-25 animate-aurora delay-2000"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="p-6">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-white mb-2 mama-bear-glow animate-float">
+                    🐻 Enhanced Mama Bear Sanctuary
+                </h1>
+                <p class="text-xl text-white/80">
+                    Next-level AI assistance with Computer Use Agent & Enhanced Browser
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Interface -->
+        <main class="flex-1 p-6">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Computer Use Agent -->
+                <div class="glass-effect rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <div class="mb-4">
+                        <h2 class="text-2xl font-bold text-white mb-2">🤖 Computer Use Agent</h2>
+                        <p class="text-white/70">Let Mama Bear control your computer and automate desktop tasks</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <input type="text" id="computerTask" 
+                               placeholder="Tell Mama Bear what to do on your computer..."
+                               class="w-full px-4 py-3 glass-effect rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        
+                        <button onclick="executeComputerTask()" 
+                                class="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 animate-pulse-glow">
+                            🚀 Execute Computer Task
+                        </button>
+                    </div>
+                    
+                    <div id="computerTaskStatus" class="mt-4 p-3 glass-effect rounded-lg hidden">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-white text-sm">Task executing...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shared Browser Sessions -->
+                <div class="glass-effect rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <div class="mb-4">
+                        <h2 class="text-2xl font-bold text-white mb-2">🌐 Shared Browser</h2>
+                        <p class="text-white/70">Collaborate with Mama Bear in real-time browser sessions</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <input type="url" id="browserUrl" 
+                               placeholder="Enter URL to start shared session..."
+                               value="https://google.com"
+                               class="w-full px-4 py-3 glass-effect rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        
+                        <button onclick="createSharedBrowser()" 
+                                class="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300">
+                            🔗 Create Shared Session
+                        </button>
+                    </div>
+                    
+                    <div id="browserSessions" class="mt-4 space-y-2">
+                        <!-- Sessions will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Multi-Instance Research -->
+                <div class="glass-effect rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <div class="mb-4">
+                        <h2 class="text-2xl font-bold text-white mb-2">🔍 Multi-Instance Research</h2>
+                        <p class="text-white/70">Parallel research across multiple virtual environments</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <textarea id="researchTopics" 
+                                  placeholder="Enter research topics (one per line)..."
+                                  rows="3"
+                                  class="w-full px-4 py-3 glass-effect rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+                        
+                        <button onclick="startMultiResearch()" 
+                                class="w-full px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg font-semibold hover:from-pink-700 hover:to-purple-700 transition-all duration-300">
+                            🔬 Start Parallel Research
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Agent Orchestration -->
+                <div class="glass-effect rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <div class="mb-4">
+                        <h2 class="text-2xl font-bold text-white mb-2">🎭 Agent Orchestration</h2>
+                        <p class="text-white/70">Coordinate multiple AI agents for complex workflows</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <select id="agentType" class="w-full px-4 py-3 glass-effect rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="research">Research Specialist</option>
+                            <option value="browser_automation">Browser Automation</option>
+                            <option value="computer_use">Computer Use Agent</option>
+                            <option value="collaboration">Collaboration Manager</option>
+                        </select>
+                        
+                        <input type="text" id="agentTask" 
+                               placeholder="Describe the task for the agent..."
+                               class="w-full px-4 py-3 glass-effect rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        
+                        <button onclick="submitAgentTask()" 
+                                class="w-full px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all duration-300">
+                            🎪 Deploy Agent
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Panel -->
+        <div class="fixed bottom-6 right-6">
+            <div class="glass-effect rounded-xl p-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-white text-sm">🐻 Mama Bear Online</span>
+                </div>
+                <p class="text-white/60 text-xs mt-1" id="taskCount">0 active tasks</p>
+            </div>
+        </div>
+
+        <!-- Connection Status -->
+        <div id="connectionStatus" class="fixed top-6 right-6">
+            <div class="glass-effect rounded-lg px-4 py-2">
+                <span class="text-white text-sm">🔗 Connecting to backend...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeTasks = 0;
+        let isConnected = false;
+
+        // Update task counter
+        function updateTaskCount() {
+            document.getElementById('taskCount').textContent = `${activeTasks} active tasks`;
+        }
+
+        // Show connection status
+        function updateConnectionStatus(connected) {
+            const statusEl = document.getElementById('connectionStatus');
+            if (connected) {
+                statusEl.innerHTML = '<div class="glass-effect rounded-lg px-4 py-2"><span class="text-green-300 text-sm">✅ Connected to Mama Bear</span></div>';
+                setTimeout(() => statusEl.style.display = 'none', 3000);
+            } else {
+                statusEl.innerHTML = '<div class="glass-effect rounded-lg px-4 py-2"><span class="text-red-300 text-sm">❌ Connection failed - Demo Mode</span></div>';
+            }
+        }
+
+        // Execute Computer Use Agent task
+        async function executeComputerTask() {
+            const task = document.getElementById('computerTask').value;
+            if (!task) return;
+
+            activeTasks++;
+            updateTaskCount();
+            
+            const statusEl = document.getElementById('computerTaskStatus');
+            statusEl.classList.remove('hidden');
+            statusEl.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    <span class="text-white text-sm">Mama Bear is executing: "${task}"</span>
+                </div>
+            `;
+
+            try {
+                const response = await fetch('/api/enhanced/computer-use', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        task_description: task,
+                        user_id: 'nathan_sanctuary'
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    statusEl.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span class="text-white text-sm">Task started! ID: ${result.task_id}</span>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Failed to submit task');
+                }
+            } catch (error) {
+                statusEl.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                        <span class="text-white text-sm">Demo Mode: Would execute "${task}" on your computer</span>
+                    </div>
+                `;
+            }
+
+            document.getElementById('computerTask').value = '';
+            activeTasks--;
+            updateTaskCount();
+        }
+
+        // Create shared browser session
+        async function createSharedBrowser() {
+            const url = document.getElementById('browserUrl').value;
+            
+            activeTasks++;
+            updateTaskCount();
+
+            try {
+                const response = await fetch('/api/enhanced/shared-browser/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: 'nathan_sanctuary',
+                        initial_url: url
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    addBrowserSession(result.session);
+                } else {
+                    throw new Error('Failed to create session');
+                }
+            } catch (error) {
+                // Demo mode
+                const sessionId = 'demo_' + Date.now();
+                addBrowserSession({
+                    session_id: sessionId,
+                    url: url,
+                    created_at: new Date().toISOString()
+                });
+            }
+
+            activeTasks--;
+            updateTaskCount();
+        }
+
+        // Add browser session to UI
+        function addBrowserSession(session) {
+            const sessionsEl = document.getElementById('browserSessions');
+            const sessionEl = document.createElement('div');
+            sessionEl.className = 'p-3 glass-effect rounded-lg';
+            sessionEl.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-white text-sm font-medium">Session: ${session.session_id.substring(0, 12)}...</span>
+                        <p class="text-white/60 text-xs">${session.url}</p>
+                    </div>
+                    <span class="text-green-300 text-xs">🟢 Active</span>
+                </div>
+            `;
+            sessionsEl.appendChild(sessionEl);
+        }
+
+        // Start multi-instance research
+        async function startMultiResearch() {
+            const topics = document.getElementById('researchTopics').value.split('\n').filter(t => t.trim());
+            if (topics.length === 0) return;
+
+            activeTasks++;
+            updateTaskCount();
+
+            try {
+                const response = await fetch('/api/enhanced/multi-research', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        topics: topics,
+                        user_id: 'nathan_sanctuary'
+                    })
+                });
+
+                if (response.ok) {
+                    alert(`Research started for ${topics.length} topics!`);
+                } else {
+                    throw new Error('Failed to start research');
+                }
+            } catch (error) {
+                alert(`Demo Mode: Would research ${topics.length} topics in parallel`);
+            }
+
+            document.getElementById('researchTopics').value = '';
+            activeTasks--;
+            updateTaskCount();
+        }
+
+        // Submit agent task
+        async function submitAgentTask() {
+            const agentType = document.getElementById('agentType').value;
+            const task = document.getElementById('agentTask').value;
+            if (!task) return;
+
+            activeTasks++;
+            updateTaskCount();
+
+            try {
+                const response = await fetch('/api/enhanced/submit-task', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        description: task,
+                        task_type: agentType,
+                        user_id: 'nathan_sanctuary',
+                        priority: 1
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`Agent deployed! Task ID: ${result.task_id}`);
+                } else {
+                    throw new Error('Failed to submit task');
+                }
+            } catch (error) {
+                alert(`Demo Mode: ${agentType} would execute "${task}"`);
+            }
+
+            document.getElementById('agentTask').value = '';
+            activeTasks--;
+            updateTaskCount();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test backend connection
+            fetch('/api/enhanced/agent-status')
+                .then(response => {
+                    if (response.ok) {
+                        isConnected = true;
+                        updateConnectionStatus(true);
+                    } else {
+                        throw new Error('Backend not available');
+                    }
+                })
+                .catch(() => {
+                    updateConnectionStatus(false);
+                });
+
+            updateTaskCount();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                if (document.activeElement.id === 'computerTask') {
+                    executeComputerTask();
+                } else if (document.activeElement.id === 'agentTask') {
+                    submitAgentTask();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

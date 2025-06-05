@@ -1,0 +1,23 @@
+# Core Flask dependencies
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SocketIO==5.3.6
+
+# AI and ML dependencies
+google-generativeai==0.7.2
+anthropic==0.34.2
+openai==1.6.1
+
+# Database and storage
+aiofiles==23.2.1
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+asyncio==3.4.3
+uuid==1.30
+json5==0.9.14
+pathlib==1.0.1
+
+# Development
+python-dateutil==2.8.2

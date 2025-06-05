@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Podplay Sanctuary - AI Development Environment
+# Sitemap: https://8001-owoyqd-lnaafd.public.scrapybara.com/sitemap.xml
