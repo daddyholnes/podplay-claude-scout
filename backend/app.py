@@ -6,6 +6,8 @@ Complete AI-powered development sanctuary with intelligent orchestration
 
 import asyncio
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import logging
 from datetime import datetime
 from flask import Flask, request, jsonify, render_template

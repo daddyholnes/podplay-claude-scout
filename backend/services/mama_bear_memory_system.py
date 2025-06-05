@@ -116,7 +116,9 @@ class EnhancedMemoryManager:
         
         # Initialize storage
         self._ensure_storage_directory()
-        asyncio.create_task(self._load_persistent_data())
+    
+    async def async_init(self):
+        await self._load_persistent_data()
         
         # Background tasks
         asyncio.create_task(self._memory_consolidation_loop())
@@ -690,10 +692,9 @@ class EnhancedMemoryManager:
         pass
 
 # Integration function
-def initialize_enhanced_memory(mem0_client=None) -> EnhancedMemoryManager:
+async def initialize_enhanced_memory(mem0_client=None) -> EnhancedMemoryManager:
     """Initialize the enhanced memory system"""
-    
     memory_manager = EnhancedMemoryManager(mem0_client)
+    await memory_manager.async_init()
     logger.info("🧠 Enhanced Mama Bear Memory System initialized!")
-    
     return memory_manager

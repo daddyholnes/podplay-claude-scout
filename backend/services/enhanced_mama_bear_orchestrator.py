@@ -13,7 +13,7 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 
 from .enhanced_scrapybara_manager import enhanced_scrapybara
-from .mama_bear_memory_system import MemoryManager
+from .mama_bear_memory_system import EnhancedMemoryManager
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ class EnhancedMamaBearOrchestrator:
             'collaboration_manager': {'status': 'available', 'capabilities': ['collaboration', 'session_management']},
             'multi_instance_coordinator': {'status': 'available', 'capabilities': ['multi_instance', 'parallel_processing']}
         }
-        self.memory_manager = MemoryManager()
+        self.memory_manager = EnhancedMemoryManager()
         
     async def submit_task(self, task_description: str, task_type: TaskType, user_id: str, priority: int = 1) -> str:
         """Submit a new task to the orchestrator"""

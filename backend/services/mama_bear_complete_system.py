@@ -77,7 +77,7 @@ class CompleteMamaBearSystem:
             
             # Initialize Memory System
             if MEM0_AVAILABLE:
-                self.memory_manager = initialize_enhanced_memory()
+                self.memory_manager = await initialize_enhanced_memory()
             else:
                 logger.warning("Mem0 not available, using fallback memory")
                 self.memory_manager = FallbackMemoryManager()
