@@ -1,0 +1,46 @@
+# Podplay Sanctuary - Immersive 7 Page UI PRD
+
+## Executive Summary
+Build a unified, sensory-friendly AI development sanctuary for neurodivergent creators. The platform features 7 core pages, each an immersive, themed environment with Mama Bear agent presence, persistent memory, and seamless navigation. Integrate 12 mini-apps and official model icons for all supported AI models (Gemini, Claude, OpenAI, etc.) using 21st.dev (magic MCP) for UI inspiration and logo search.
+
+## Core Pages & Roles
+1. Home Sanctuary – Welcome dashboard, daily briefing, agent presence.
+2. Memory Palace – Persistent chat, context, memory visualization.
+3. Creation Studio – Code build, agent plans, orchestration, mini-app launcher.
+4. Learning Hub – Docs, tutorials, AI learning, interactive guides.
+5. Sensory Garden – Calming widgets, theme selection, accessibility controls.
+6. Agent Command Center – Manage/configure agents, model selection, model icons.
+7. Logs & Activity Feed – History, notifications, real-time events.
+
+## Mini-Apps & Model Icons
+- Integrate 12 mini-apps (list in sidebar or launcher).
+- Each mini-app has a unique icon and theme, designed with 21st.dev inspiration.
+- Display official model icons for Gemini, Claude, OpenAI, and others in Agent Command Center and Creation Studio.
+
+## Design & UX Requirements
+- Use 21st.dev (magic MCP) for UI inspiration and component scaffolding.
+- Three sensory-friendly themes (calm, focus, night).
+- Framer Motion for smooth transitions.
+- TailwindCSS for accessible, beautiful styling.
+- All pages support theme switching and accessibility features.
+- Each page features Mama Bear agent controls or presence.
+- Navigation is persistent, no context switching.
+
+## Technical Stack
+- React 18+ (TypeScript)
+- TailwindCSS
+- Framer Motion
+- SanctuaryLayout for navigation
+- Magic MCP (21st.dev) for UI scaffolding and logos
+
+## Acceptance Criteria
+- All 7 pages scaffolded and accessible from navigation.
+- Each page has a clear heading, immersive blurb, and agent/model icon.
+- Mini-apps and model icons present as specified.
+- Theme switching and accessibility features are functional.
+- Ready for further feature and backend integration.
+
+## Notes
+- Prioritize calm, empowering design for neurodivergent users.
+- Mama Bear agent should be proactive, supportive, and always visible.
+- Persistent memory and context across sessions (Mem0 planned).
